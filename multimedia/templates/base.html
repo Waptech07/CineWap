@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/styles.css" />
+    <title>CINEWAP</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav">
+        <div class="logo">
+          <a href="/">CINEWAP</a>
+        </div>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <div>
+          <ul id="menu" class="menu">
+            <li>
+              <a href="/">HOME</a>
+            </li>
+            <li>
+              <a href="{% url 'image_list' %}">IMAGES</a>
+            </li>
+            <li>
+              <a href="{% url 'video_list' %}">VIDEOS</a>
+            </li>
+            <li class="dropdown">
+              <div class="dropbtn">
+                UPLOAD<div class="dropdown-content">
+                  <a href="{% url 'upload_image' %}">UPLOAD IMAGE</a>
+                  <a href="{% url 'upload_video' %}">UPLOAD VIDEO</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% block content %}
+
+    {% endblock %}
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-logo">
+          <a href="/">CINEWAP</a>
+        </div>
+        <div class="footer-links">
+          <ul>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="{% url 'image_list' %}">Images</a>
+            </li>
+            <li>
+              <a href="{% url 'video_list' %}">Videos</a>
+            </li>
+            <!-- Add more links as needed -->
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 CINEWAP. All rights reserved.</p>
+      </div>
+    </footer>
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById('menu')
+        menu.classList.toggle('show')
+      }
+    </script>
+  </body>
+</html>

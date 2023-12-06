@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% include 'modal-details' %}
+{% block content %}
+  <h1 class="header">IMAGES</h1>
+  <div class="card-body">
+    {% for image in images %}
+      <div class="card">
+        <img src="{{ image.image.url }}" alt="{{ image.title }}" />
+        <h3>{{ image.title }}</h3>
+        <p>{{ image.description|truncatechars:100 }}</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

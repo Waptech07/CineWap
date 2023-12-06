@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="header">VIDEOS</h1>
+  <div class="card-body">
+    {% for video in videos %}
+      <div class="card">
+        <video loop autoplay muted controls>
+          <source src="{{ video.video.url }}" type="video/mp4" />
+        </video>
+        <h3>{{ video.title }}</h3>
+        <p>{{ video.description|truncatechars:100 }}</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

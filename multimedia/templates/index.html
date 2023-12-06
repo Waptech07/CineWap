@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="banner">
+    <h1>Welcome to Multimedia World</h1>
+    <p>Explore a variety of images and videos!</p>
+  </div>
+  <h1 class="header">RECENT IMAGES</h1>
+  <div class="card-body">
+    {% for image in images %}
+      <div class="card">
+        <img src="{{ image.image.url }}/" alt="{{ image.title }}" />
+        <h3>{{ image.title }}</h3>
+        <p>{{ image.description|truncatechars:100 }}</p>
+      </div>
+    {% endfor %}
+  </div>
+  <video class="banner2" autoplay muted loop>
+    <source src="../media/assets/video.mp4" type="video/mp4" />
+  </video>
+  <h1 class="header">RECENT VIDEOS</h1>
+  <div class="card-body">
+    {% for video in videos %}
+      <div class="card">
+        <video controls>
+          <source src="{{ video.video.url }}" type="video/mp4" />
+        </video>
+        <h3>{{ video.title }}</h3>
+        <p>{{ video.description|truncatechars:100 }}</p>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="banner3">
+    <h1>COMING SOON!!!!!</h1>
+  </div>
+{% endblock %}

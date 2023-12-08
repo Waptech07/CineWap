@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-olk+yytm@stqcq)-)!hhx-m=u@ro&ey(y539!12!cby=xn2$2t"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -57,7 +57,8 @@ ROOT_URLCONF = "multimedia_site.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            os.path.join(BASE_DIR, 'multimedia/templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

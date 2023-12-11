@@ -1,21 +1,106 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1 class="header">VIDEOS</h1>
+  <style>
+    .card {
+      border: 1px solid #ddd;
+      margin: 10px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      z-index: 1000;
+    }
+
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+      z-index: 900;
+    }
+
+    .details-button {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4caf50;
+      color: #fff;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .details-button:hover {
+      background-color: #45a049;
+    }
+
+    video,
+    iframe {
+      width: 100%;
+      height: 200px; /* Adjust the height as needed */
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+  </style>
+
+  <h1 class="header">VIDEOS</h1>
   <div class="card-body">
     {% for video in videos %}
       <div class="card">
         {% if video.video %}
-          <!-- Display video file if available -->
-          <video loop autoplay muted controls>
+          <video loop muted controls>
             <source src="{{ video.video.url }}" type="video/mp4" />
           </video>
         {% elif video.video_link %}
-          <!-- Display video link if available -->
-          <iframe width="100%" height="" src="{{ video.video_link }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <iframe width="100%" height="200px" src="{{ video.video_link }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         {% endif %}
-        <h3>{{ video.title }}</h3>
-        <p>{{ video.description|truncatechars:100 }}</p>
+        <button class="details-button" onclick="openModal('{{ video.id }}')">Details</button>
+        <!--modal-->
+        <div class="modal" id="modal-{{ video.id }}">
+          <h3>{{ video.title }}</h3>
+          {% if video.video %}
+            <video loop autoplay muted controls>
+              <source src="{{ video.video.url }}" type="video/mp4" />
+            </video>
+          {% elif video.video_link %}
+            <iframe width="100%" height="400px" src="{{ video.video_link }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          {% endif %}
+          <p>{{ video.description }}</p>
+          <button onclick="closeModal('{{ video.id }}')">Close</button>
+        </div>
+
+        <!-- Modal Backdrop -->
+        <div class="modal-backdrop" onclick="closeModal('{{ video.id }}')"></div>
       </div>
     {% endfor %}
   </div>
+
+  <script>
+    function openModal(videoId) {
+      document.getElementById('modal-' + videoId).style.display = 'block';
+      document.querySelector('.modal-backdrop').style.display = 'block';
+    }
+
+    function closeModal(videoId) {
+      document.getElementById('modal-' + videoId).style.display = 'none';
+      document.querySelector('.modal-backdrop').style.display = 'none';
+    }
+  </script>
 {% endblock %}

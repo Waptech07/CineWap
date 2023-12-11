@@ -7,7 +7,7 @@ body {
 }
 
 nav {
-    background-color: #333;
+    background-color: #45a049;
     color: white;
     padding: 10px 0;
     position: fixed;
@@ -95,9 +95,13 @@ ul li a:hover {
     color: white;
 }
 
+.header {
+    text-align: center;
+}
+
 .banner {
     height: 300px;
-    background: url('../../../media/assets/background.png') no-repeat bottom;
+    background: url('../../../media/assets/image.png') no-repeat center/cover;
     color: white;
     text-align: center;
     padding: 50px;
@@ -137,14 +141,7 @@ ul li a:hover {
     color: #ffcc00;
 }
 
-.header {
-    text-align: center;
-    margin-top: 150px;
-    color: #333;
-}
-
 /* card styling */
-
 .card-body {
     display: flex;
     flex-wrap: wrap;
@@ -163,7 +160,7 @@ ul li a:hover {
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
 .card img {
@@ -175,6 +172,12 @@ ul li a:hover {
 }
 
 .card video {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+.card iframe {
     width: 100%;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -192,7 +195,6 @@ ul li a:hover {
 }
 
 /* Form styling */
-
 form {
     max-width: 400px;
     margin: 20px auto;
@@ -210,7 +212,10 @@ label {
 }
 
 input[type="text"],
-input[type="file"] {
+input[type="file"],
+input[type="url"],
+textarea,
+select {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -334,7 +339,7 @@ button:hover {
     }
 
     .header {
-        margin-top: 60px;
+        margin-top: 80px;
         font-size: 32px;
     }
 
@@ -348,7 +353,7 @@ button:hover {
 }
 
 /* Mobile Styling */
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
     nav {
         padding: 10px 0;
     }
@@ -395,6 +400,11 @@ button:hover {
         max-width: 80%;
     }
 
+    .header {
+        margin-top: 80px;
+        font-size: 32px;
+    }
+
 }
 
 /* Footer styling */
@@ -426,6 +436,7 @@ footer {
     margin: 0;
     padding: 0;
     display: flex;
+    margin-bottom: 0;
 }
 
 .footer-links li {

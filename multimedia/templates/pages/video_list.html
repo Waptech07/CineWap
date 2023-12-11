@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
   <style>
+    footer {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+    }
+    
     .card {
       border: 1px solid #ddd;
       margin: 10px;
@@ -9,7 +15,7 @@
       border-radius: 8px;
       position: relative;
     }
-
+    
     .modal {
       display: none;
       position: fixed;
@@ -22,7 +28,7 @@
       border-radius: 8px;
       z-index: 1000;
     }
-
+    
     .modal-backdrop {
       display: none;
       position: fixed;
@@ -33,7 +39,7 @@
       background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
       z-index: 900;
     }
-
+    
     .details-button {
       position: absolute;
       bottom: 10px;
@@ -46,11 +52,11 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
+    
     .details-button:hover {
       background-color: #45a049;
     }
-
+    
     video,
     iframe {
       width: 100%;
@@ -72,7 +78,7 @@
           <iframe width="100%" height="200px" src="{{ video.video_link }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         {% endif %}
         <button class="details-button" onclick="openModal('{{ video.id }}')">Details</button>
-        <!--modal-->
+        <!-- modal -->
         <div class="modal" id="modal-{{ video.id }}">
           <h3>{{ video.title }}</h3>
           {% if video.video %}
@@ -94,13 +100,13 @@
 
   <script>
     function openModal(videoId) {
-      document.getElementById('modal-' + videoId).style.display = 'block';
-      document.querySelector('.modal-backdrop').style.display = 'block';
+      document.getElementById('modal-' + videoId).style.display = 'block'
+      document.querySelector('.modal-backdrop').style.display = 'block'
     }
-
+    
     function closeModal(videoId) {
-      document.getElementById('modal-' + videoId).style.display = 'none';
-      document.querySelector('.modal-backdrop').style.display = 'none';
+      document.getElementById('modal-' + videoId).style.display = 'none'
+      document.querySelector('.modal-backdrop').style.display = 'none'
     }
   </script>
 {% endblock %}

@@ -1,14 +1,131 @@
 {% extends 'base.html' %}
-{% include 'modal-details' %}
 {% block content %}
+  <style>
+    .card {
+      border: 1px solid #ddd;
+      margin: 10px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      position: relative;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 100%;
+      max-height: 80%;
+      overflow: auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      z-index: 1000;
+      text-align: center;
+    }
+    
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 900;
+    }
+    
+    .details-button {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4caf50;
+      color: #fff;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .details-button:hover {
+      background-color: #45a049;
+    }
+    
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    
+    #modalTitle {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    
+    #modalImage {
+      max-height: 50vh;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    
+    #modalDescription {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    
+    #modalCloseButton {
+      background-color: #f44336;
+      color: #fff;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    #modalCloseButton:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+
   <h1 class="header">IMAGES</h1>
   <div class="card-body">
     {% for image in images %}
       <div class="card">
         <img src="{{ image.image.url }}" alt="{{ image.title }}" />
         <h3>{{ image.title }}</h3>
-        <p>{{ image.description|truncatechars:100 }}</p>
+        <p>{{ image.description|truncatechars:50 }}</p>
+        <button class="details-button" onclick="openImageModal('{{ image.id }}', '{{ image.image.url }}', '{{ image.title }}', '{{ image.description }}')">Details</button>
       </div>
     {% endfor %}
+
+    <!-- Modal -->
+    <div class="modal-backdrop" onclick="closeImageModal()"></div>
+    <div class="modal" id="imageModal">
+      <h2 id="modalTitle"></h2>
+      <img id="modalImage" />
+      <p id="modalDescription"></p>
+      <button id="modalCloseButton" onclick="closeImageModal()">Close</button>
+    </div>
   </div>
+
+  <script>
+    function openImageModal(id, imageUrl, title, description) {
+      document.getElementById('modalTitle').innerText = title
+      document.getElementById('modalImage').src = imageUrl
+      document.getElementById('modalDescription').innerText = description
+    
+      document.querySelector('.modal-backdrop').style.display = 'block'
+      document.getElementById('imageModal').style.display = 'block'
+    }
+    
+    function closeImageModal() {
+      document.querySelector('.modal-backdrop').style.display = 'none'
+      document.getElementById('imageModal').style.display = 'none'
+    }
+  </script>
 {% endblock %}
